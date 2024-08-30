@@ -63,15 +63,13 @@ def agregar_miembro():
 @app.route('/member/<int:id>', methods=['DELETE'])
 def eliminar_miembro(id):
     try:
-
-        status = jackson_family.delete_member(id)
-        if status.get("status") == 400:
-            return jsonify({"error": status["error"]}), 400
-        
-        return jsonify(jackson_family.get_all_members()), 200
-
+        result = jackson_family.delete_member(id)
+        if "done" in result:
+            return jsonify(result), 200
+        return jsonify(result), 400
     except Exception as e:
-        return jsonify({"error": "Internal server error", "message": str(e)}), 500    
+        return jsonify({"error": "Internal server error", "message": str(e)}), 500
+
     
 @app.route('/member/<int:member_id>', methods=['GET'])
 def obtener_miembro(member_id):

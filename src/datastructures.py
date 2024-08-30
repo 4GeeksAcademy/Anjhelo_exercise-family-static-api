@@ -15,8 +15,9 @@ class FamilyStructure:
         # example list of members
         self._members = []
         self.add_member("John", 33, [7, 13, 22])
-        self.add_member("Tommy", 35, [10, 14, 3], 3443)
+        self.add_member("Tommy", 23, [34,65,23,4,6], 3443)
         self.add_member("Jimmy", 5, [1])
+
     def _generateId(self):
         return randint(0, 99999999)
 
@@ -32,9 +33,8 @@ class FamilyStructure:
             "age": age,
             "lucky_numbers": numeros
         }
-
+        
         self._members.append(member)
-
         return {"mensaje": "Miembro agregado exitosamente", "status": 200}
 
 
@@ -42,9 +42,9 @@ class FamilyStructure:
         for i, miembro in enumerate(self._members):
             if miembro["id"] == id:
                 self._members.pop(i)
-                return {"done": True}, 200
-        else:
-            return {"error": "Id no encontrado", "status": 400}
+                return {"done": True} 
+        return {"error": "Id no encontrado", "status": 400}
+
 
 
     def get_member(self, id):

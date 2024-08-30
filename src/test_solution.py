@@ -90,11 +90,6 @@ def test_get_first_member_tommy(client):
     assert "first_name" in data
     assert data["first_name"] == "Tommy"
 
-@pytest.mark.it("Implement method DELETE /member/<int:id> to delete a family member")
-def test_delete_member(client):
-    response = client.delete('/member/3443')
-    assert response.status_code == 200
-
 @pytest.mark.it("Method DELETE /member/3443 should return dictionary with 'done' key")
 def test_delete_response(client):
     client.post('/member', json={
@@ -105,6 +100,13 @@ def test_delete_response(client):
 	})
     response = client.delete('/member/3443')
     assert response.json["done"] == True
+
+@pytest.mark.it("Implement method DELETE /member/<int:id> to delete a family member")
+def test_delete_member(client):
+    response = client.delete('/member/3443')
+    assert response.status_code == 200
+
+
 
 @pytest.mark.it("After deleting the member 3443 we called GET /members and it should return a list with 4 members")
 def test_get_members_returns_list_of_four(client):
